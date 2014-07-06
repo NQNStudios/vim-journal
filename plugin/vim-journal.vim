@@ -33,6 +33,9 @@ if !exists("g:vimJournalFileExtension")
   let g:vimJournalFileExtension = '.txt'
 end
 
+" Fields
+let s:currentDir = ''
+
 " Global commands
 command Journal call s:journal()
 command TimeStamp call s:insertTimeStamp()
@@ -51,7 +54,8 @@ fun! s:insertTimeStamp()
 endfun
 
 fun! s:openRootDir()
-  cd $HOME
+  let s:currentDir = ''
+  let s:currentDir .= $HOME
   call s:openDir(g:vimJournalDir)
 endfun
 
@@ -67,14 +71,14 @@ endfun
 
 fun! s:openDayFile()
   let s:day = strftime(g:vimJournalDayFormat)
-  execute 'e' fnameescape(s:day . g:vimJournalFileExtension)
+  execute 'e' fnameescape(s:currentDir . '/' . s:day . g:vimJournalFileExtension)
 endfun
 
 fun! s:openDir(dir)
   if !isdirectory(a:dir)
     call mkdir(fnameescape(a:dir), 'p')
   end
-  execute 'cd' fnameescape(a:dir)
+  let s:currentDir .= '/' . a:dir
 endfun
 
 " ------------------------------------------------------------------------------
