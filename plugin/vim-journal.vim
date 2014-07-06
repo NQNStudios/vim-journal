@@ -8,12 +8,30 @@ let s:keepcpo           = &cpo
 set cpo&vim
 
 " Settings
-let g:vimJournalDir = 'Journal'
-let g:vimJournalYearFormat = '%Y'
-let g:vimJournalMonthFormat = '%B'
-let g:vimJournalDayFormat = '%m-%d-%y'
-let g:vimJournalTimeStampFormat = '%c'
-let g:vimJournalFileExtension = '.txt'
+
+if !exists("g:vimJournalDir")
+  let g:vimJournalDir = 'Journal'
+end
+
+if !exists("g:vimJournalYearFormat")
+  let g:vimJournalYearFormat = '%Y'
+end
+
+if !exists("g:vimJournalMonthFormat")
+  let g:vimJournalMonthFormat = '%B'
+end
+
+if !exists("g:vimJournalDayFormat")
+  let g:vimJournalDayFormat = '%m-%d-%y'
+end
+
+if !exists("g:vimJournalTimeStampFormat")
+  let g:vimJournalTimeStampFormat = '%c'
+end
+
+if !exists("g:vimJournalFileExtension")
+  let g:vimJournalFileExtension = '.txt'
+end
 
 " Global commands
 command Journal call s:journal()
@@ -28,13 +46,8 @@ fun! s:journal()
 endfun
 
 fun! s:insertTimeStamp()
-  let s:timeStamp = strftime(g:vimJournalTimeStampFormat)
-
-  echo 'time stamp: ' . s:timeStamp
-
-  let @a = s:timeStamp
-  normal! G
-  execute "put a"
+  let @"=strftime(g:vimJournalTimeStampFormat)
+  normal! P
 endfun
 
 fun! s:openRootDir()
