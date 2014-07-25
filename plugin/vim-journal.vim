@@ -75,8 +75,8 @@ fun! s:openDayFile()
 endfun
 
 fun! s:openDir(dir)
-  if !isdirectory(a:dir)
-    call mkdir(fnameescape(a:dir), 'p')
+  if !isdirectory(s:currentDir . '/' . a:dir)
+    call mkdir(fnameescape(s:currentDir . '/' . a:dir), 'p')
   end
   let s:currentDir .= '/' . a:dir
 endfun
