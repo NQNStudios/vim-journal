@@ -30,7 +30,7 @@ if !exists("g:vimJournalTimeStampFormat")
 end
 
 if !exists("g:vimJournalFileExtension")
-  let g:vimJournalFileExtension = '.txt'
+  let g:vimJournalFileExtension = '.markdown'
 end
 
 " Fields
