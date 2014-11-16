@@ -50,7 +50,7 @@ endfun
 
 fun! s:insertTimeStamp()
   let @"=strftime(g:vimJournalTimeStampFormat)
-  normal! P
+  normal! p
 endfun
 
 fun! s:openRootDir()
