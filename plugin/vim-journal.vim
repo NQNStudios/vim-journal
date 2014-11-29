@@ -39,6 +39,7 @@ let s:currentDir = ''
 " Global commands
 command Journal call s:journal()
 command TimeStamp call s:insertTimeStamp()
+command SwapDelete call s:swapDelete()
 
 " Script functions
 fun! s:journal()
@@ -51,6 +52,13 @@ endfun
 fun! s:insertTimeStamp()
   let @"=strftime(g:vimJournalTimeStampFormat)
   normal! p
+endfun
+
+fun! s:swapDelete()
+  let l:workingDir = getcwd() " remember the initial working dir
+  cd %:p:h " change working directory to current file directory
+  call delete('.' . expand('%') . '.swp') " delete the swap file
+  execute 'cd ' . l:workingDir
 endfun
 
 fun! s:openRootDir()
