@@ -84,7 +84,8 @@ endfun
 
 fun! s:openDir(dir)
   if !isdirectory(s:currentDir . '/' . a:dir)
-    call mkdir(fnameescape(s:currentDir . '/' . a:dir), 'p')
+    call mkdir(s:currentDir . '/' . a:dir, 'p')
+    echom "Making a new directory"
   end
   let s:currentDir .= '/' . a:dir
 endfun
